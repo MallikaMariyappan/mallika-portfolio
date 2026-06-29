@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Github, Linkedin, Code2, Phone, Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Icon } from "@iconify/react";
 
 const links = [
   { href: "#hero",       label: "Home"       },
@@ -10,15 +11,15 @@ const links = [
 ];
 
 const socials = [
-  { icon: <Github size={15} />,   href: "https://github.com/MallikaMariyappan",    label: "GitHub"   },
-  { icon: <Linkedin size={15} />, href: "https://www.linkedin.com/in/mallika-mr/", label: "LinkedIn" },
-  { icon: <Code2 size={15} />,    href: "https://leetcode.com/u/AlpY7oW1gS/",     label: "LeetCode" },
-  { icon: <Phone size={15} />,    href: "tel:+917200309967",                       label: "Phone"    },
+  { icon: "mdi:github",    href: "https://github.com/MallikaMariyappan",    label: "GitHub"   },
+  { icon: "mdi:linkedin",  href: "https://www.linkedin.com/in/mallika-mr/", label: "LinkedIn" },
+  { icon: "simple-icons:leetcode", href: "https://leetcode.com/u/AlpY7oW1gS/", label: "LeetCode" },
+  { icon: "mdi:phone",     href: "tel:+917200309967",                       label: "Phone"    },
 ];
 
 export default function Navbar() {
-  const [open, setOpen]         = useState(false);
-  const [mounted, setMounted]   = useState(false);
+  const [open, setOpen]       = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -28,120 +29,101 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
-  // Always render the same shell on server + first client paint
   const isScrolled = mounted && scrolled;
 
   return (
-    <nav suppressHydrationWarning style={{
-      position: "fixed",
-      top: 0, left: 0, right: 0,
-      zIndex: 100,
-      background: isScrolled ? "rgba(245,245,245,0.96)" : "rgba(245,245,245,0.92)",
-      backdropFilter: "blur(14px)",
-      WebkitBackdropFilter: "blur(14px)",
-      borderBottom: "1px solid #e8e8e8",
-      boxShadow: isScrolled ? "0 2px 20px rgba(0,0,0,0.07)" : "none",
-      transition: "box-shadow 0.3s ease",
-    }}>
-      <div style={{ maxWidth: 1180, margin: "0 auto", padding: "0 32px" }}>
-        <div style={{
-          display: "flex",
-          alignItems: "center",
-          height: 64,
-          gap: 48,
-        }}>
-          {/* Left — nav links */}
-          <div style={{ display: "flex", gap: 32, flex: 1 }} className="desk-nav">
+    <motion.nav
+      suppressHydrationWarning
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      style={{
+        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+        background: isScrolled ? "rgba(244,244,244,0.97)" : "rgba(244,244,244,0.9)",
+        backdropFilter: "blur(16px)",
+        WebkitBackdropFilter: "blur(16px)",
+        borderBottom: "1px solid #e4e4e4",
+        boxShadow: isScrolled ? "0 2px 24px rgba(0,0,0,0.07)" : "none",
+        transition: "box-shadow 0.3s ease",
+      }}
+    >
+      <div className="max-w-[1180px] mx-auto px-8">
+        <div className="flex items-center h-16 gap-12">
+
+          {/* Left links */}
+          <div className="hidden md:flex gap-8 flex-1">
             {links.map(l => (
               <a key={l.href} href={l.href} className="nav-link">{l.label}</a>
             ))}
           </div>
 
-          {/* Center — logo circle */}
-          <a href="#hero" style={{ textDecoration: "none", flexShrink: 0 }} onClick={() => setOpen(false)}>
-            <div style={{
-              width: 44, height: 44,
-              borderRadius: "50%",
-              background: "#111",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              color: "#fff", fontWeight: 900, fontSize: "0.82rem",
-              letterSpacing: "0.02em",
-              boxShadow: "0 2px 12px rgba(0,0,0,0.18)",
-              userSelect: "none",
-            }}>
+          {/* Center logo */}
+          <a href="#hero" onClick={() => setOpen(false)} style={{ textDecoration: "none", flexShrink: 0 }}>
+            <motion.div
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-11 h-11 rounded-full bg-[#111] flex items-center justify-center text-white font-black text-sm tracking-tight shadow-lg select-none"
+            >
               MM
-            </div>
+            </motion.div>
           </a>
 
-          {/* Right — social icons */}
-          <div style={{ display: "flex", gap: 8, flex: 1, justifyContent: "flex-end" }} className="desk-nav">
+          {/* Right socials */}
+          <div className="hidden md:flex gap-2 flex-1 justify-end">
             {socials.map(s => (
-              <a
+              <motion.a
                 key={s.label}
                 href={s.href}
                 target={s.href.startsWith("http") ? "_blank" : undefined}
                 rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 aria-label={s.label}
                 className="social-icon"
+                whileHover={{ y: -2 }}
               >
-                {s.icon}
-              </a>
+                <Icon icon={s.icon} width={16} />
+              </motion.a>
             ))}
           </div>
 
           {/* Burger */}
           <button
             onClick={() => setOpen(!open)}
-            className="burger-btn"
-            style={{ background: "none", border: "none", color: "#111", cursor: "pointer", display: "none" }}
+            className="md:hidden ml-auto p-1 text-[#111] bg-transparent border-none cursor-pointer"
             aria-label="Toggle menu"
           >
-            {open ? <X size={22} /> : <Menu size={22} />}
+            <Icon icon={open ? "mdi:close" : "mdi:menu"} width={24} />
           </button>
         </div>
 
         {/* Mobile menu */}
-        {open && (
-          <div style={{
-            padding: "16px 0 24px",
-            display: "flex", flexDirection: "column", gap: 20,
-            borderTop: "1px solid #e8e8e8",
-          }}>
-            {links.map(l => (
-              <a
-                key={l.href}
-                href={l.href}
-                className="nav-link"
-                style={{ fontSize: "1rem" }}
-                onClick={() => setOpen(false)}
-              >
-                {l.label}
-              </a>
-            ))}
-            <div style={{ display: "flex", gap: 10, paddingTop: 8 }}>
-              {socials.map(s => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target={s.href.startsWith("http") ? "_blank" : undefined}
-                  rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  aria-label={s.label}
-                  className="social-icon"
-                >
-                  {s.icon}
-                </a>
-              ))}
-            </div>
-          </div>
-        )}
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="overflow-hidden border-t border-[#e4e4e4]"
+            >
+              <div className="flex flex-col gap-5 py-5">
+                {links.map(l => (
+                  <a key={l.href} href={l.href} className="nav-link text-base" onClick={() => setOpen(false)}>{l.label}</a>
+                ))}
+                <div className="flex gap-2 pt-2">
+                  {socials.map(s => (
+                    <a key={s.label} href={s.href}
+                      target={s.href.startsWith("http") ? "_blank" : undefined}
+                      rel={s.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      aria-label={s.label} className="social-icon">
+                      <Icon icon={s.icon} width={16} />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .desk-nav    { display: none !important; }
-          .burger-btn  { display: block !important; }
-        }
-      `}</style>
-    </nav>
+    </motion.nav>
   );
 }

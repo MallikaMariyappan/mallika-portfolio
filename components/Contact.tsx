@@ -1,14 +1,16 @@
 "use client";
 import { useState } from "react";
-import { Mail, Phone, MapPin, Github, Linkedin, Code2, Send, ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { Icon } from "@iconify/react";
+import { fadeUpD, staggerContainer } from "@/lib/motion";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [sent, setSent] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    const sub = encodeURIComponent(form.subject || `Message from ${form.name}`);
+    const sub  = encodeURIComponent(form.subject || `Message from ${form.name}`);
     const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`);
     window.location.href = `mailto:mmallika2121@gmail.com?subject=${sub}&body=${body}`;
     setSent(true);
@@ -16,125 +18,143 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" style={{ padding: "100px 32px", background: "#f5f5f5" }}>
-      <div style={{ maxWidth: 1180, margin: "0 auto" }}>
+    <section id="contact" className="bg-[#f4f4f4] py-24 px-8">
+      <div className="max-w-[1180px] mx-auto">
 
-        <p className="section-label" style={{ marginBottom: 14 }}>Get In Touch</p>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 20, marginBottom: 56 }}>
-          <h2 style={{ fontSize: "clamp(1.8rem,4vw,2.8rem)", fontWeight: 900, letterSpacing: "-0.03em", color: "#111", lineHeight: 1.1 }}>
-            Let&apos;s Work<br />Together.
-          </h2>
-          <p style={{ color: "#888", fontSize: "0.9rem", maxWidth: 320, lineHeight: 1.7 }}>
-            Actively seeking Frontend Engineer / Flutter Developer roles in Chennai or Remote. 15 days notice period.
-          </p>
-        </div>
+        {/* Heading */}
+        <motion.div
+          initial="hidden" whileInView="show" viewport={{ once: true }}
+          variants={staggerContainer}
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-14"
+        >
+          <motion.div variants={fadeUpD(0)}>
+            <p className="section-label mb-3">Get In Touch</p>
+            <h2
+              className="text-[clamp(1.9rem,4vw,2.8rem)] font-black tracking-[-0.03em] text-[#111] leading-[1.08]"
+              style={{ fontFamily: "var(--font-syne)" }}
+            >
+              Let&apos;s Work<br />Together.
+            </h2>
+          </motion.div>
+          <motion.p variants={fadeUpD(0.1)} className="text-[#888] text-[0.9rem] max-w-xs leading-[1.7]">
+            Seeking Frontend / Flutter Developer roles in Chennai or Remote. 15 days notice period.
+          </motion.p>
+        </motion.div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: 40 }} className="contact-grid">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-10">
 
           {/* Left — info */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+          <motion.div
+            initial="hidden" whileInView="show" viewport={{ once: true }}
+            variants={staggerContainer}
+            className="flex flex-col gap-6"
+          >
             {[
-              { icon: <Mail size={18} />, label: "Email", value: "mmallika2121@gmail.com", href: "mailto:mmallika2121@gmail.com" },
-              { icon: <Phone size={18} />, label: "Phone", value: "+91 7200309967", href: "tel:+917200309967" },
-              { icon: <MapPin size={18} />, label: "Location", value: "Chennai, Tamil Nadu", href: null },
-            ].map(c => (
-              <div key={c.label} style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
-                <div style={{
-                  width: 44, height: 44, borderRadius: 10,
-                  background: "#fff", border: "1.5px solid #e8e8e8",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  color: "#333", flexShrink: 0,
-                  boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
-                }}>
-                  {c.icon}
+              { icon: "mdi:email-outline",     label: "Email",    value: "mmallika2121@gmail.com", href: "mailto:mmallika2121@gmail.com" },
+              { icon: "mdi:phone-outline",     label: "Phone",    value: "+91 7200309967",         href: "tel:+917200309967"             },
+              { icon: "mdi:map-marker-outline",label: "Location", value: "Chennai, Tamil Nadu",    href: null                           },
+            ].map((c, i) => (
+              <motion.div key={c.label} variants={fadeUpD(i * 0.07)} className="flex items-center gap-4">
+                <div className="w-11 h-11 rounded-xl bg-white border border-[#e8e8e8] flex items-center justify-center flex-shrink-0 shadow-sm">
+                  <Icon icon={c.icon} width={18} className="text-[#444]" />
                 </div>
                 <div>
-                  <p style={{ color: "#aaa", fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 3 }}>{c.label}</p>
+                  <p className="text-[#aaa] text-[0.68rem] font-bold uppercase tracking-[0.1em] mb-0.5">{c.label}</p>
                   {c.href
-                    ? <a href={c.href} style={{ color: "#333", fontSize: "0.9rem", textDecoration: "none", fontWeight: 500 }}
-                        onMouseOver={e => e.currentTarget.style.color = "#111"}
-                        onMouseOut={e => e.currentTarget.style.color = "#333"}>
-                        {c.value}
-                      </a>
-                    : <span style={{ color: "#333", fontSize: "0.9rem", fontWeight: 500 }}>{c.value}</span>}
+                    ? <a href={c.href} className="text-[#333] text-[0.88rem] font-medium no-underline hover:text-[#111] transition-colors">{c.value}</a>
+                    : <span className="text-[#333] text-[0.88rem] font-medium">{c.value}</span>
+                  }
                 </div>
-              </div>
+              </motion.div>
             ))}
 
-            {/* Social */}
-            <div style={{ paddingTop: 8 }}>
-              <p style={{ color: "#aaa", fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 14 }}>Find Me Online</p>
-              <div style={{ display: "flex", gap: 10 }}>
+            {/* Socials */}
+            <motion.div variants={fadeUpD(0.25)}>
+              <p className="text-[#aaa] text-[0.68rem] font-bold uppercase tracking-[0.1em] mb-3">Find Me Online</p>
+              <div className="flex gap-2.5">
                 {[
-                  { icon: <Github size={17} />,   href: "https://github.com/MallikaMariyappan",    label: "GitHub"   },
-                  { icon: <Linkedin size={17} />, href: "https://www.linkedin.com/in/mallika-mr/",  label: "LinkedIn" },
-                  { icon: <Code2 size={17} />,    href: "https://leetcode.com/u/AlpY7oW1gS/",      label: "LeetCode" },
+                  { icon: "mdi:github",           href: "https://github.com/MallikaMariyappan",    label: "GitHub"   },
+                  { icon: "mdi:linkedin",          href: "https://www.linkedin.com/in/mallika-mr/", label: "LinkedIn" },
+                  { icon: "simple-icons:leetcode", href: "https://leetcode.com/u/AlpY7oW1gS/",     label: "LeetCode" },
                 ].map(s => (
-                  <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
-                    aria-label={s.label} className="social-icon"
-                    style={{ background: "#fff", boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}>
-                    {s.icon}
-                  </a>
+                  <motion.a
+                    key={s.label} href={s.href}
+                    target="_blank" rel="noopener noreferrer"
+                    aria-label={s.label}
+                    className="social-icon bg-white shadow-sm"
+                    whileHover={{ y: -2 }}
+                  >
+                    <Icon icon={s.icon} width={16} />
+                  </motion.a>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
-            {/* Availability card */}
-            <div style={{
-              padding: "20px 22px",
-              background: "#111", borderRadius: 12,
-              display: "flex", gap: 14, alignItems: "center", marginTop: 8,
-            }}>
-              <div style={{ width: 9, height: 9, borderRadius: "50%", background: "#4ade80", boxShadow: "0 0 8px #4ade80", flexShrink: 0 }} />
-              <div>
-                <p style={{ color: "#fff", fontWeight: 700, fontSize: "0.88rem" }}>Available for hire</p>
-                <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.78rem", marginTop: 2 }}>15 days notice period · Chennai / Remote</p>
+            {/* Availability */}
+            <motion.div
+              variants={fadeUpD(0.3)}
+              className="flex items-center gap-3 bg-[#111] rounded-xl px-5 py-4"
+            >
+              <span className="w-2.5 h-2.5 rounded-full bg-green-400 flex-shrink-0" style={{ boxShadow: "0 0 8px #4ade80" }} />
+              <div className="flex-1">
+                <p className="text-white font-bold text-[0.85rem]">Available for hire</p>
+                <p className="text-white/40 text-[0.75rem] mt-0.5">15 days notice · Chennai / Remote</p>
               </div>
-              <ArrowUpRight size={16} color="rgba(255,255,255,0.3)" style={{ marginLeft: "auto" }} />
-            </div>
-          </div>
+              <Icon icon="mdi:arrow-top-right" width={16} className="text-white/25" />
+            </motion.div>
+          </motion.div>
 
           {/* Right — form */}
-          <div className="card" style={{ padding: 36, background: "#fff" }}>
-            <h3 style={{ color: "#111", fontWeight: 800, fontSize: "1.1rem", marginBottom: 24 }}>Send a Message</h3>
-            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }} className="form-row">
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.65 }}
+            className="bg-white border border-[#e8e8e8] rounded-xl p-9"
+          >
+            <h3 className="text-[#111] font-bold text-[1.05rem] mb-6" style={{ fontFamily: "var(--font-syne)" }}>
+              Send a Message
+            </h3>
+            <form onSubmit={submit} className="flex flex-col gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label style={{ color: "#888", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", display: "block", marginBottom: 6 }}>Name</label>
-                  <input type="text" required className="input" placeholder="Your name"
+                  <label className="text-[#888] text-[0.7rem] font-bold uppercase tracking-[0.08em] block mb-2">Name</label>
+                  <input type="text" required className="form-input" placeholder="Your name"
                     value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} />
                 </div>
                 <div>
-                  <label style={{ color: "#888", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", display: "block", marginBottom: 6 }}>Email</label>
-                  <input type="email" required className="input" placeholder="you@company.com"
+                  <label className="text-[#888] text-[0.7rem] font-bold uppercase tracking-[0.08em] block mb-2">Email</label>
+                  <input type="email" required className="form-input" placeholder="you@company.com"
                     value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
                 </div>
               </div>
               <div>
-                <label style={{ color: "#888", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", display: "block", marginBottom: 6 }}>Subject</label>
-                <input type="text" className="input" placeholder="Job opportunity / Collaboration"
+                <label className="text-[#888] text-[0.7rem] font-bold uppercase tracking-[0.08em] block mb-2">Subject</label>
+                <input type="text" className="form-input" placeholder="Job opportunity / Collaboration"
                   value={form.subject} onChange={e => setForm({ ...form, subject: e.target.value })} />
               </div>
               <div>
-                <label style={{ color: "#888", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", display: "block", marginBottom: 6 }}>Message</label>
-                <textarea required className="input" rows={5} placeholder="Hi Mallika, I'd love to discuss..."
+                <label className="text-[#888] text-[0.7rem] font-bold uppercase tracking-[0.08em] block mb-2">Message</label>
+                <textarea required className="form-input" rows={5}
+                  placeholder="Hi Mallika, I'd love to discuss..."
                   value={form.message} onChange={e => setForm({ ...form, message: e.target.value })}
                   style={{ resize: "vertical" }} />
               </div>
-              <button type="submit" className="btn-dark" style={{ justifyContent: "center", marginTop: 4 }}>
-                {sent ? "Opening email client..." : <><Send size={15} /> Send Message</>}
-              </button>
+              <motion.button
+                type="submit"
+                whileHover={{ y: -2, opacity: 0.9 }}
+                whileTap={{ scale: 0.97 }}
+                className="flex items-center justify-center gap-2 w-full bg-[#111] text-white font-bold text-[0.85rem] tracking-[0.06em] uppercase py-3.5 rounded-lg mt-1 border-none cursor-pointer"
+              >
+                {sent
+                  ? <><Icon icon="mdi:check-circle-outline" width={16} /> Opening email client...</>
+                  : <><Icon icon="mdi:send-outline" width={16} /> Send Message</>
+                }
+              </motion.button>
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 860px) {
-          .contact-grid { grid-template-columns: 1fr !important; }
-          .form-row { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
     </section>
   );
 }
