@@ -4,11 +4,11 @@ import { Icon } from "@iconify/react";
 import { fadeUpD, staggerContainer } from "@/lib/motion";
 
 const facts = [
-  { icon: "mdi:school-outline",          label: "Education",     value: "BCA — SFR College, Tamil Nadu (2019–2022)" },
-  { icon: "mdi:office-building-outline", label: "Company",       value: "Dataspark AI Solutions (Full-time)"        },
-  { icon: "mdi:map-marker-outline",      label: "Location",      value: "Chennai, Tamil Nadu"                       },
-  { icon: "mdi:clock-fast",              label: "Notice Period",  value: "15 Days"                                   },
-  { icon: "mdi:target",                  label: "Seeking",        value: "Frontend / Flutter Developer Roles"        },
+  { icon: "mdi:school-outline",          label: "Education",    value: "BCA — SFR College, Tamil Nadu (2019–2022)" },
+  { icon: "mdi:office-building-outline", label: "Company",      value: "Dataspark AI Solutions (Full-time)"        },
+  { icon: "mdi:map-marker-outline",      label: "Location",     value: "Chennai, Tamil Nadu"                       },
+  { icon: "mdi:clock-fast",              label: "Notice Period",value: "15 Days"                                   },
+  { icon: "mdi:target",                  label: "Seeking",      value: "Frontend / Flutter Developer Roles"        },
 ];
 
 const whatIDo = [
@@ -21,76 +21,61 @@ const whatIDo = [
   "Lead client demos, sprint planning, and delivery",
 ];
 
+const S = {
+  section: { background: "#fff", padding: "96px 32px" } as React.CSSProperties,
+  wrap:    { maxWidth: 1180, margin: "0 auto" } as React.CSSProperties,
+  heading: { fontFamily: "var(--font-syne),sans-serif", fontSize: "clamp(1.9rem,4vw,2.8rem)", fontWeight: 900, letterSpacing: "-0.03em", color: "#111", lineHeight: 1.08 } as React.CSSProperties,
+  card:    { background: "#fff", border: "1px solid #e8e8e8", borderRadius: 12, padding: 28, transition: "transform 0.3s,box-shadow 0.3s" } as React.CSSProperties,
+  iconBox: (bg = "#111") => ({ width: 36, height: 36, borderRadius: 8, background: bg, border: "1px solid #e8e8e8", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }) as React.CSSProperties,
+};
+
 export default function About() {
   return (
-    <section id="about" className="bg-white py-24 px-8">
-      <div className="max-w-[1180px] mx-auto">
+    <section id="about" style={S.section}>
+      <div style={S.wrap}>
 
         {/* Heading */}
         <motion.div
           initial="hidden" whileInView="show" viewport={{ once: true }}
           variants={staggerContainer}
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-14"
+          style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 20, marginBottom: 56 }}
         >
           <motion.div variants={fadeUpD(0)}>
-            <p className="section-label mb-3">About Me</p>
-            <h2
-              className="text-[clamp(1.9rem,4vw,2.8rem)] font-black tracking-[-0.03em] text-[#111] leading-[1.08]"
-              style={{ fontFamily: "var(--font-syne)" }}
-            >
-              The Person Behind<br />the Code.
-            </h2>
+            <p className="section-label" style={{ marginBottom: 12 }}>About Me</p>
+            <h2 style={S.heading}>The Person Behind<br />the Code.</h2>
           </motion.div>
-          <motion.p variants={fadeUpD(0.1)} className="text-[#888] text-[0.9rem] leading-[1.75] max-w-sm">
+          <motion.p variants={fadeUpD(0.1)} style={{ color: "#888", fontSize: "0.9rem", lineHeight: 1.75, maxWidth: 340 }}>
             Promoted from Intern to Frontend Developer — I own end-to-end
             delivery across web and mobile for live EdTech clients.
           </motion.p>
         </motion.div>
 
-        <div className="h-px bg-[#ebebeb] mb-14" />
+        <div style={{ height: 1, background: "#ebebeb", marginBottom: 56 }} />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48 }} className="about-grid">
 
           {/* Left */}
-          <motion.div
-            initial="hidden" whileInView="show" viewport={{ once: true }}
-            variants={staggerContainer}
-          >
-            <motion.div variants={fadeUpD(0)} className="flex gap-4 mb-9">
-              <div className="w-11 h-11 rounded-xl bg-[#111] flex items-center justify-center flex-shrink-0">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={staggerContainer}>
+            <motion.div variants={fadeUpD(0)} style={{ display: "flex", gap: 16, marginBottom: 36 }}>
+              <div style={{ ...S.iconBox("#111"), width: 44, height: 44, borderRadius: 10 }}>
                 <Icon icon="mdi:account-outline" width={20} color="#fff" />
               </div>
               <div>
-                <h3
-                  className="text-[#111] font-bold text-[0.95rem] mb-2"
-                  style={{ fontFamily: "var(--font-syne)" }}
-                >
-                  My Story
-                </h3>
-                <p className="text-[#666] text-[0.88rem] leading-[1.8]">
-                  I&apos;m a Frontend &amp; Flutter Developer with 1.9 years of production
-                  experience at Dataspark AI Solutions. Starting as an intern, I was promoted
-                  to Frontend Developer within 3 months and owned full delivery of 3
-                  dual-platform EdTech apps simultaneously.
+                <h3 style={{ color: "#111", fontWeight: 700, fontSize: "0.95rem", marginBottom: 8, fontFamily: "var(--font-syne),sans-serif" }}>My Story</h3>
+                <p style={{ color: "#666", fontSize: "0.88rem", lineHeight: 1.8 }}>
+                  I&apos;m a Frontend &amp; Flutter Developer with 1.9 years of production experience at
+                  Dataspark AI Solutions. Starting as an intern, I was promoted to Frontend Developer
+                  within 3 months and owned full delivery of 3 dual-platform EdTech apps simultaneously.
                 </p>
               </div>
             </motion.div>
 
             <motion.div variants={fadeUpD(0.05)}>
-              <h3
-                className="text-[#111] font-bold text-[0.78rem] tracking-[0.1em] uppercase mb-4"
-                style={{ fontFamily: "var(--font-syne)" }}
-              >
-                What I Do
-              </h3>
-              <ul className="flex flex-col gap-2.5">
+              <h3 style={{ color: "#111", fontWeight: 700, fontSize: "0.78rem", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 16, fontFamily: "var(--font-syne),sans-serif" }}>What I Do</h3>
+              <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 10 }}>
                 {whatIDo.map((item, i) => (
-                  <motion.li
-                    key={i}
-                    variants={fadeUpD(0.05 * i)}
-                    className="flex items-start gap-3 text-[#555] text-[0.87rem]"
-                  >
-                    <Icon icon="mdi:circle-small" width={20} className="text-[#111] flex-shrink-0 mt-0.5" />
+                  <motion.li key={i} variants={fadeUpD(0.04 * i)} style={{ display: "flex", alignItems: "flex-start", gap: 10, color: "#555", fontSize: "0.87rem" }}>
+                    <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#111", flexShrink: 0, marginTop: 6 }} />
                     {item}
                   </motion.li>
                 ))}
@@ -99,61 +84,35 @@ export default function About() {
           </motion.div>
 
           {/* Right */}
-          <motion.div
-            initial="hidden" whileInView="show" viewport={{ once: true }}
-            variants={staggerContainer}
-          >
-            <h3
-              className="text-[#111] font-bold text-[0.78rem] tracking-[0.1em] uppercase mb-5"
-              style={{ fontFamily: "var(--font-syne)" }}
-            >
-              Quick Facts
-            </h3>
-            <div className="flex flex-col">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={staggerContainer}>
+            <h3 style={{ color: "#111", fontWeight: 700, fontSize: "0.78rem", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 20, fontFamily: "var(--font-syne),sans-serif" }}>Quick Facts</h3>
+            <div style={{ display: "flex", flexDirection: "column" }}>
               {facts.map((f, i) => (
-                <motion.div
-                  key={f.label}
-                  variants={fadeUpD(0.06 * i)}
-                  className={`flex items-center gap-4 py-4 ${i < facts.length - 1 ? "border-b border-[#f0f0f0]" : ""}`}
-                >
-                  <div className="w-9 h-9 rounded-lg bg-[#f5f5f5] border border-[#e8e8e8] flex items-center justify-center flex-shrink-0">
-                    <Icon icon={f.icon} width={17} className="text-[#444]" />
+                <motion.div key={f.label} variants={fadeUpD(0.05 * i)} style={{ display: "flex", alignItems: "center", gap: 14, padding: "16px 0", borderBottom: i < facts.length - 1 ? "1px solid #f0f0f0" : "none" }}>
+                  <div style={S.iconBox("#f5f5f5")}>
+                    <Icon icon={f.icon} width={17} style={{ color: "#444" }} />
                   </div>
                   <div>
-                    <p className="text-[#aaa] text-[0.7rem] font-semibold uppercase tracking-[0.08em] mb-0.5">
-                      {f.label}
-                    </p>
-                    <p className="text-[#333] text-[0.87rem] font-medium">{f.value}</p>
+                    <p style={{ color: "#aaa", fontSize: "0.68rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 2 }}>{f.label}</p>
+                    <p style={{ color: "#333", fontSize: "0.87rem", fontWeight: 500 }}>{f.value}</p>
                   </div>
                 </motion.div>
               ))}
             </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-3 mt-7">
-              {[
-                { v: "1.9+", l: "Years Exp" },
-                { v: "3",    l: "Apps Live"  },
-                { v: "50+",  l: "Users"      },
-              ].map((s, i) => (
-                <motion.div
-                  key={s.l}
-                  variants={fadeUpD(0.1 + i * 0.06)}
-                  className="text-center py-5 px-2 bg-[#f8f8f8] rounded-xl border border-[#efefef]"
-                >
-                  <div
-                    className="text-[1.9rem] font-black text-[#111] tracking-[-0.04em]"
-                    style={{ fontFamily: "var(--font-syne)" }}
-                  >
-                    {s.v}
-                  </div>
-                  <div className="text-[#888] text-[0.7rem] mt-1 font-medium">{s.l}</div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginTop: 28 }}>
+              {[{ v: "1.9+", l: "Years Exp" }, { v: "3", l: "Apps Live" }, { v: "50+", l: "Users" }].map((s, i) => (
+                <motion.div key={s.l} variants={fadeUpD(0.1 + i * 0.06)} style={{ textAlign: "center", padding: "20px 8px", background: "#f8f8f8", borderRadius: 12, border: "1px solid #efefef" }}>
+                  <div style={{ fontSize: "1.9rem", fontWeight: 900, color: "#111", letterSpacing: "-0.04em", fontFamily: "var(--font-syne),sans-serif" }}>{s.v}</div>
+                  <div style={{ color: "#888", fontSize: "0.7rem", marginTop: 4, fontWeight: 500 }}>{s.l}</div>
                 </motion.div>
               ))}
             </div>
           </motion.div>
         </div>
       </div>
+
+      <style>{`@media(max-width:768px){.about-grid{grid-template-columns:1fr!important}}`}</style>
     </section>
   );
 }

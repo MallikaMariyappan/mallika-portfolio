@@ -11,15 +11,15 @@ const links = [
 ];
 
 const socials = [
-  { icon: "mdi:github",    href: "https://github.com/MallikaMariyappan",    label: "GitHub"   },
-  { icon: "mdi:linkedin",  href: "https://www.linkedin.com/in/mallika-mr/", label: "LinkedIn" },
-  { icon: "simple-icons:leetcode", href: "https://leetcode.com/u/AlpY7oW1gS/", label: "LeetCode" },
-  { icon: "mdi:phone",     href: "tel:+917200309967",                       label: "Phone"    },
+  { icon: "mdi:github",            href: "https://github.com/MallikaMariyappan",    label: "GitHub"   },
+  { icon: "mdi:linkedin",          href: "https://www.linkedin.com/in/mallika-mr/", label: "LinkedIn" },
+  { icon: "simple-icons:leetcode", href: "https://leetcode.com/u/AlpY7oW1gS/",     label: "LeetCode" },
+  { icon: "mdi:phone",             href: "tel:+917200309967",                       label: "Phone"    },
 ];
 
 export default function Navbar() {
-  const [open, setOpen]       = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [open, setOpen]         = useState(false);
+  const [mounted, setMounted]   = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -36,10 +36,10 @@ export default function Navbar() {
       suppressHydrationWarning
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        background: isScrolled ? "rgba(244,244,244,0.97)" : "rgba(244,244,244,0.9)",
+        background: "rgba(244,244,244,0.96)",
         backdropFilter: "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
         borderBottom: "1px solid #e4e4e4",
@@ -47,29 +47,37 @@ export default function Navbar() {
         transition: "box-shadow 0.3s ease",
       }}
     >
-      <div className="max-w-[1180px] mx-auto px-8">
-        <div className="flex items-center h-16 gap-12">
+      <div style={{ maxWidth: 1180, margin: "0 auto", padding: "0 32px" }}>
+        {/* Main row */}
+        <div style={{ display: "flex", alignItems: "center", height: 64, gap: 40 }}>
 
-          {/* Left links */}
-          <div className="hidden md:flex gap-8 flex-1">
+          {/* Left — links */}
+          <div style={{ display: "flex", gap: 32, flex: 1 }} className="desk-links">
             {links.map(l => (
               <a key={l.href} href={l.href} className="nav-link">{l.label}</a>
             ))}
           </div>
 
-          {/* Center logo */}
+          {/* Center — logo */}
           <a href="#hero" onClick={() => setOpen(false)} style={{ textDecoration: "none", flexShrink: 0 }}>
             <motion.div
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
-              className="w-11 h-11 rounded-full bg-[#111] flex items-center justify-center text-white font-black text-sm tracking-tight shadow-lg select-none"
+              style={{
+                width: 44, height: 44, borderRadius: "50%",
+                background: "#111",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                color: "#fff", fontWeight: 900, fontSize: "0.82rem",
+                boxShadow: "0 2px 12px rgba(0,0,0,0.18)",
+                userSelect: "none",
+              }}
             >
               MM
             </motion.div>
           </a>
 
-          {/* Right socials */}
-          <div className="hidden md:flex gap-2 flex-1 justify-end">
+          {/* Right — socials */}
+          <div style={{ display: "flex", gap: 8, flex: 1, justifyContent: "flex-end" }} className="desk-links">
             {socials.map(s => (
               <motion.a
                 key={s.label}
@@ -88,8 +96,12 @@ export default function Navbar() {
           {/* Burger */}
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden ml-auto p-1 text-[#111] bg-transparent border-none cursor-pointer"
+            className="burger-btn"
             aria-label="Toggle menu"
+            style={{
+              background: "none", border: "none", color: "#111",
+              cursor: "pointer", display: "none", padding: 4,
+            }}
           >
             <Icon icon={open ? "mdi:close" : "mdi:menu"} width={24} />
           </button>
@@ -103,13 +115,16 @@ export default function Navbar() {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="overflow-hidden border-t border-[#e4e4e4]"
+              style={{ overflow: "hidden", borderTop: "1px solid #e4e4e4" }}
             >
-              <div className="flex flex-col gap-5 py-5">
+              <div style={{ display: "flex", flexDirection: "column", gap: 20, padding: "20px 0 24px" }}>
                 {links.map(l => (
-                  <a key={l.href} href={l.href} className="nav-link text-base" onClick={() => setOpen(false)}>{l.label}</a>
+                  <a key={l.href} href={l.href} className="nav-link"
+                    style={{ fontSize: "1rem" }} onClick={() => setOpen(false)}>
+                    {l.label}
+                  </a>
                 ))}
-                <div className="flex gap-2 pt-2">
+                <div style={{ display: "flex", gap: 10, paddingTop: 8 }}>
                   {socials.map(s => (
                     <a key={s.label} href={s.href}
                       target={s.href.startsWith("http") ? "_blank" : undefined}
@@ -124,6 +139,13 @@ export default function Navbar() {
           )}
         </AnimatePresence>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .desk-links  { display: none !important; }
+          .burger-btn  { display: block !important; }
+        }
+      `}</style>
     </motion.nav>
   );
 }
