@@ -1,76 +1,44 @@
 "use client";
-import { Github, Linkedin, Code2, Heart } from "lucide-react";
+import { Github, Linkedin, Code2 } from "lucide-react";
 
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer
-      style={{
-        padding: "40px 24px",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
-        background: "rgba(0,0,0,0.3)",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: 1100,
-          margin: "0 auto",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexWrap: "wrap",
-          gap: 20,
-        }}
-      >
-        {/* Left */}
+    <footer style={{ padding: "36px 32px", background: "#111", borderTop: "1px solid #222" }}>
+      <div style={{ maxWidth: 1180, margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 20 }}>
+
         <div>
-          <span
-            style={{
-              fontSize: "1rem",
-              fontWeight: 700,
-              background: "linear-gradient(135deg,#6366f1,#a855f7)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            Mallika M
-          </span>
-          <p style={{ color: "#475569", fontSize: "0.8rem", marginTop: 4 }}>
-            Frontend Developer & Flutter Mobile App Developer
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
+            <div style={{ width: 28, height: 28, borderRadius: "50%", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <span style={{ color: "#111", fontWeight: 900, fontSize: "0.7rem" }}>MM</span>
+            </div>
+            <span style={{ color: "#fff", fontWeight: 700, fontSize: "0.9rem" }}>Mallika M</span>
+          </div>
+          <p style={{ color: "rgba(255,255,255,0.3)", fontSize: "0.78rem" }}>
+            Frontend Developer · Flutter Developer · Chennai
           </p>
         </div>
 
-        {/* Center */}
-        <p
-          style={{
-            color: "#475569",
-            fontSize: "0.82rem",
-            display: "flex",
-            alignItems: "center",
-            gap: 6,
-          }}
-        >
-          Built with <Heart size={14} style={{ color: "#ec4899" }} fill="#ec4899" /> using
-          Next.js & Tailwind CSS · © {year}
+        <p style={{ color: "rgba(255,255,255,0.25)", fontSize: "0.78rem" }}>
+          Built with Next.js &amp; Tailwind CSS © {year}
         </p>
 
-        {/* Right */}
-        <div style={{ display: "flex", gap: 14 }}>
+        <div style={{ display: "flex", gap: 10 }}>
           {[
-            { icon: <Github size={18} />, href: "https://github.com/MallikaMariyappan", label: "GitHub" },
-            { icon: <Linkedin size={18} />, href: "https://www.linkedin.com/in/mallika-mr/", label: "LinkedIn" },
-            { icon: <Code2 size={18} />, href: "https://leetcode.com/u/AlpY7oW1gS/", label: "LeetCode" },
-          ].map((s) => (
-            <a
-              key={s.label}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
+            { icon: <Github size={16} />,   href: "https://github.com/MallikaMariyappan",    label: "GitHub"   },
+            { icon: <Linkedin size={16} />, href: "https://www.linkedin.com/in/mallika-mr/",  label: "LinkedIn" },
+            { icon: <Code2 size={16} />,    href: "https://leetcode.com/u/AlpY7oW1gS/",      label: "LeetCode" },
+          ].map(s => (
+            <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
               aria-label={s.label}
-              style={{ color: "#475569", transition: "color 0.2s" }}
-              onMouseOver={(e) => (e.currentTarget.style.color = "#a5b4fc")}
-              onMouseOut={(e) => (e.currentTarget.style.color = "#475569")}
-            >
+              style={{
+                width: 36, height: 36, borderRadius: "50%",
+                border: "1px solid rgba(255,255,255,0.12)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                color: "rgba(255,255,255,0.35)", transition: "all 0.2s",
+              }}
+              onMouseOver={e => { e.currentTarget.style.background = "#fff"; e.currentTarget.style.color = "#111"; }}
+              onMouseOut={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "rgba(255,255,255,0.35)"; }}>
               {s.icon}
             </a>
           ))}
