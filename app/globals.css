@@ -1,0 +1,213 @@
+@import "tailwindcss";
+
+/* ── Fonts ─────────────────────────────────────────── */
+:root {
+  --font-inter: "Inter", sans-serif;
+  --font-syne: "Syne", sans-serif;
+}
+
+/* ── Reset & Base ───────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-inter);
+  background: #000;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── No underlines on all links ────────────────────── */
+a, a:hover, a:visited, a:active, a:focus { text-decoration: none !important; }
+button { cursor: pointer; }
+
+/* ── Section Label ──────────────────────────────────── */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.section-label::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 1.5px;
+  background: #555;
+  border-radius: 2px;
+}
+
+/* ── Nav Link ───────────────────────────────────────── */
+.nav-link {
+  color: #aaa;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+  text-decoration: none !important;
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #fff;
+  transition: width 0.25s ease;
+}
+
+.nav-link:hover { color: #fff; }
+.nav-link:hover::after { width: 100%; }
+
+/* ── Social Icon ────────────────────────────────────── */
+.social-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #888;
+  transition: all 0.2s;
+  text-decoration: none !important;
+  flex-shrink: 0;
+  background: transparent;
+}
+
+.social-icon:hover {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+/* ── Tag ────────────────────────────────────────────── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  background: #111;
+  border: 1px solid #2a2a2a;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #aaa;
+  letter-spacing: 0.02em;
+  transition: all 0.2s;
+}
+
+.tag:hover {
+  background: #1a1a1a;
+  border-color: #444;
+  color: #fff;
+}
+
+/* ── Skill Bar ──────────────────────────────────────── */
+.skill-bar-track {
+  width: 100%;
+  height: 3px;
+  background: #1a1a1a;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #555 0%, #fff 100%);
+  border-radius: 999px;
+}
+
+/* ── Form Input ─────────────────────────────────────── */
+.form-input {
+  width: 100%;
+  padding: 11px 14px;
+  background: #111;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.88rem;
+  font-family: var(--font-inter);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input::placeholder { color: #555; }
+
+.form-input:focus {
+  border-color: #555;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.05);
+}
+
+/* ── Timeline Dot ───────────────────────────────────── */
+.tl-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #000;
+  box-shadow: 0 0 0 3px #333;
+}
+
+/* ── Rotating Badge ─────────────────────────────────── */
+@keyframes spin-badge { to { transform: rotate(360deg); } }
+.rotate-badge { animation: spin-badge 12s linear infinite; }
+
+/* ── Scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #555; }
+
+/* ── Selection ──────────────────────────────────────── */
+::selection { background: #fff; color: #000; }
+
+/* ── Custom cursor ──────────────────────────────────── */
+.cursor-dot {
+  width: 8px; height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+}
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 1.5px solid rgba(255,255,255,0.5);
+  border-radius: 50%;
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 99997;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s cubic-bezier(0.22,1,0.36,1), height 0.25s cubic-bezier(0.22,1,0.36,1), border-color 0.2s, background 0.2s;
+}
+/* Expand cursor ring on interactive elements */
+a:hover ~ .cursor-ring,
+button:hover ~ .cursor-ring { width: 54px; height: 54px; }
+
+/* Make all interactive elements inherit custom cursor */
+a, button, [role="button"] { cursor: none !important; }
+
+/* ── Noise grain overlay ─────────────────────────────── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
