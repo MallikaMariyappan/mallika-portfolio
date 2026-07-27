@@ -3,7 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Github, ArrowUpRight, Globe, Smartphone,
-  Zap, Layers, Building2, Lock, ChevronDown, ChevronUp,
+  Zap, Layers, Building2, Lock, ChevronDown, ChevronUp, DollarSign,
 } from "lucide-react";
 import { fadeUpD, staggerContainer } from "@/lib/motion";
 
@@ -33,8 +33,34 @@ const projects = [
     icon: Zap,
   },
   {
-    id: "ielts",
+    id: "spendwise",
     num: "02",
+    title: "SpendWise",
+    subtitle: "Personal Finance Tracker — Full-Stack Web App",
+    ownership: "personal",
+    ownershipLabel: "Personal Project",
+    company: null,
+    alwaysOpen: false,
+    desc: "A full-stack personal finance web app to track income, expenses, set budgets, and visualize spending with real-time charts. Built with React, TypeScript, and Firebase — featuring instant Firestore sync, Redux Toolkit state management, and a dark mode that persists without flash.",
+    tags: ["React 18", "TypeScript", "Firebase Auth", "Firestore", "Redux Toolkit", "Tailwind CSS", "Recharts", "Framer Motion", "Vite", "React Router v6"],
+    highlights: [
+      "Email/Password auth with Firebase — session persisted across refresh, no flash redirect",
+      "Real-time Firestore onSnapshot listeners — UI updates instantly, zero polling",
+      "6-month income vs expense trend chart + spending breakdown pie chart via Recharts",
+      "10 spending categories with monthly budget targets and alerts at 80% / 100% usage",
+      "Advanced filters — by type, category, month, and free-text search",
+      "Firestore security rules — users can only read/write their own data by UID",
+      "Dark mode persisted in localStorage with no flash on load",
+      "Deployed on Vercel with live demo available",
+    ],
+    flow: ["Firebase Auth", "Firestore Listeners", "Redux State", "Memoized Selectors", "Charts", "Vercel Deploy"],
+    github: "https://github.com/MallikaMariyappan/SpendWise",
+    live: "https://spendwise1-sigma.vercel.app",
+    icon: DollarSign,
+  },
+  {
+    id: "ielts",
+    num: "03",
     title: "IELTSGenAI",
     subtitle: "AI-Powered IELTS Prep Platform — Web + Mobile",
     ownership: "professional",
@@ -58,7 +84,7 @@ const projects = [
   },
   {
     id: "esl",
-    num: "03",
+    num: "04",
     title: "ESL English Learning App",
     subtitle: "Flutter Mobile App — Google Play Store",
     ownership: "professional",
@@ -82,7 +108,7 @@ const projects = [
   },
   {
     id: "pte",
-    num: "04",
+    num: "05",
     title: "PTE Preparation Platform",
     subtitle: "Full-Stack Web Application",
     ownership: "professional",
@@ -138,17 +164,26 @@ function CardBody({ p }: { p: typeof projects[0] }) {
             {p.tags.map(t => <span key={t} className="tag" style={{ fontSize: "0.7rem" }}>{t}</span>)}
           </div>
           {/* CTA */}
-          {p.github ? (
-            <motion.a href={p.github} target="_blank" rel="noopener noreferrer"
-              whileHover={{ y: -2 }}
-              style={{ display: "inline-flex", alignItems: "center", gap: 7, background: "#fff", color: "#000", fontWeight: 700, fontSize: "0.72rem", letterSpacing: "0.06em", textTransform: "uppercase", padding: "8px 16px", borderRadius: 8 }}>
-              <Github size={13} /> View on GitHub
-            </motion.a>
-          ) : (
-            <span style={{ display: "inline-flex", alignItems: "center", gap: 7, color: "#444", fontSize: "0.72rem", fontWeight: 600, padding: "8px 16px", borderRadius: 8, border: "1px solid rgba(255,255,255,0.07)" }}>
-              <Lock size={12} /> Proprietary Source Code
-            </span>
-          )}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+            {p.github ? (
+              <motion.a href={p.github} target="_blank" rel="noopener noreferrer"
+                whileHover={{ y: -2 }}
+                style={{ display: "inline-flex", alignItems: "center", gap: 7, background: "#fff", color: "#000", fontWeight: 700, fontSize: "0.72rem", letterSpacing: "0.06em", textTransform: "uppercase", padding: "8px 16px", borderRadius: 8 }}>
+                <Github size={13} /> View on GitHub
+              </motion.a>
+            ) : (
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 7, color: "#444", fontSize: "0.72rem", fontWeight: 600, padding: "8px 16px", borderRadius: 8, border: "1px solid rgba(255,255,255,0.07)" }}>
+                <Lock size={12} /> Proprietary Source Code
+              </span>
+            )}
+            {p.live && (
+              <motion.a href={p.live} target="_blank" rel="noopener noreferrer"
+                whileHover={{ y: -2 }}
+                style={{ display: "inline-flex", alignItems: "center", gap: 7, background: "transparent", color: "#aaa", fontWeight: 700, fontSize: "0.72rem", letterSpacing: "0.06em", textTransform: "uppercase", padding: "8px 16px", borderRadius: 8, border: "1px solid rgba(255,255,255,0.18)" }}>
+                <Globe size={13} /> Live Demo <ArrowUpRight size={11} />
+              </motion.a>
+            )}
+          </div>
         </div>
 
         {/* Right */}
