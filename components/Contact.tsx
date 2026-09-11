@@ -36,7 +36,7 @@ export default function Contact() {
               </h2>
             </motion.div>
             <motion.p variants={fadeUpD(0.1)} style={{ color: "#555", fontSize: "0.9rem", maxWidth: "xs", lineHeight: 1.7 }}>
-              Seeking Frontend / Flutter Developer roles in Chennai or Remote. 15 days notice period.
+              Seeking Frontend / Flutter Developer roles in Chennai or Remote. Relieved on Aug 7 — immediate joiner.
             </motion.p>
           </div>
         </motion.div>
@@ -107,7 +107,7 @@ export default function Contact() {
               <span style={{ width: 9, height: 9, borderRadius: "50%", background: "#22c55e", flexShrink: 0, boxShadow: "0 0 8px #4ade80" }} />
               <div style={{ flex: 1 }}>
                 <p style={{ color: "#fff", fontWeight: 700, fontSize: "0.85rem" }}>Available for hire</p>
-                <p style={{ color: "#444", fontSize: "0.75rem", marginTop: 2 }}>15 days notice · Chennai / Remote</p>
+                <p style={{ color: "#444", fontSize: "0.75rem", marginTop: 2 }}>Relieved Aug 7 · Immediate Joiner · Chennai / Remote</p>
               </div>
               <ArrowUpRight size={16} color="#333" />
             </motion.div>

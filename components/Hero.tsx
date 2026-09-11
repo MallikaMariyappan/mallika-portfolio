@@ -9,7 +9,7 @@ import {
 import { fadeUpD, staggerContainer } from "@/lib/motion";
 
 const stats = [
-  { value: "1.9+", label: "Years Exp"    },
+  { value: "1y 10m", label: "Years Exp"    },
   { value: "3",    label: "Apps Live"    },
   { value: "50+",  label: "Active Users" },
   { value: "3+",   label: "Products"     },
@@ -302,7 +302,7 @@ export default function Hero() {
             variants={fadeUpD(0.15)}
             style={{ color: "#666", fontSize: "0.96rem", lineHeight: 1.8, maxWidth: 440, marginBottom: 32 }}
           >
-            1.9 years shipping production-ready{" "}
+            1 year 10 months shipping production-ready{" "}
             <strong style={{ color: "#ddd", fontWeight: 700 }}>React.js web apps</strong> &amp;{" "}
             <strong style={{ color: "#ddd", fontWeight: 700 }}>Flutter mobile apps</strong>{" "}
             for live EdTech clients. 3 apps on Google Play Store with 50+ active users.
@@ -438,7 +438,7 @@ export default function Hero() {
             </motion.a>
             <div style={{ width: 1, height: 20, background: "rgba(255,255,255,0.1)", margin: "0 4px" }} />
             <span style={{ display: "flex", alignItems: "center", gap: 5, color: "#555", fontSize: "0.78rem" }}>
-              <Clock size={13} /> 15 Days Notice
+              <Clock size={13} /> Immediate Joiner
             </span>
           </motion.div>
         </motion.div>

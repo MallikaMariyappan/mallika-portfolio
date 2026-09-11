@@ -5,9 +5,9 @@ import { fadeUpD, staggerContainer } from "@/lib/motion";
 
 const facts = [
   { icon: GraduationCap, label: "Education",     value: "BCA — SFR College, Tamil Nadu (2019–2022)" },
-  { icon: Building2,     label: "Company",       value: "Dataspark AI Solutions (Full-time)"        },
+  { icon: Building2,     label: "Company",       value: "Dataspark AI Solutions (Relieved Aug 7)"   },
   { icon: MapPin,        label: "Location",      value: "Chennai, Tamil Nadu"                       },
-  { icon: Timer,         label: "Notice Period", value: "15 Days"                                   },
+  { icon: Timer,         label: "Notice Period", value: "Immediate Joiner"                          },
   { icon: Target,        label: "Seeking",       value: "Frontend / Flutter Developer Roles"        },
 ];
 
@@ -63,7 +63,7 @@ export default function About() {
               <div>
                 <h3 style={{ color: "#fff", fontWeight: 700, fontSize: "0.95rem", marginBottom: 8, fontFamily: "var(--font-syne),sans-serif" }}>My Story</h3>
                 <p style={{ color: "#555", fontSize: "0.88rem", lineHeight: 1.8 }}>
-                  I&apos;m a Frontend &amp; Flutter Developer with 1.9 years of production experience at
+                  I&apos;m a Frontend &amp; Flutter Developer with 1 year 10 months of production experience at
                   Dataspark AI Solutions. Starting as an intern, I was promoted to Frontend Developer
                   within 3 months and owned full delivery of 3 dual-platform EdTech apps simultaneously.
                 </p>
@@ -107,7 +107,7 @@ export default function About() {
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginTop: 28 }}>
-              {[{ v: "1.9+", l: "Years Exp" }, { v: "3", l: "Apps Live" }, { v: "50+", l: "Users" }].map((s, i) => (
+              {[{ v: "1y 10m", l: "Years Exp" }, { v: "3", l: "Apps Live" }, { v: "50+", l: "Users" }].map((s, i) => (
                 <motion.div key={s.l} variants={fadeUpD(0.1 + i * 0.06)}
                   style={{ textAlign: "center", padding: "20px 8px", background: "rgba(255,255,255,0.03)", borderRadius: 12, border: "1px solid rgba(255,255,255,0.08)" }}>
                   <div style={{ fontSize: "1.9rem", fontWeight: 900, color: "#fff", letterSpacing: "-0.04em", fontFamily: "var(--font-syne),sans-serif" }}>{s.v}</div>

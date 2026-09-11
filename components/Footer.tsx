@@ -117,7 +117,7 @@ export default function Footer() {
                 />
                 <div>
                   <p style={{ color: "#fff", fontWeight: 700, fontSize: "0.78rem" }}>Open to work</p>
-                  <p style={{ color: "#444", fontSize: "0.68rem" }}>15 days notice</p>
+                  <p style={{ color: "#444", fontSize: "0.68rem" }}>Relieved Aug 7 · Immediate Joiner</p>
                 </div>
               </div>
 

@@ -13,11 +13,11 @@ const experiences = [
     iconKey: "trend",
     role: "Frontend Developer & Mobile App Developer",
     company: "Dataspark AI Solutions",
-    period: "Dec 2024 – Present",
+    period: "Dec 2024 – Aug 2026",
     type: "Full-time",
-    badge: "Current",
-    badgeBg: "rgba(34,197,94,0.12)",
-    badgeColor: "#4ade80",
+    badge: "Relieved Aug 7",
+    badgeBg: "rgba(251,191,36,0.12)",
+    badgeColor: "#fbbf24",
     points: [
       "Delivered 3+ dual-platform products (React.js web + Flutter mobile + Node.js backend) simultaneously for live EdTech clients.",
       "Built IELTSGenAI — Flutter mobile app (Play Store) + React.js web app with JWT auth and Redux state management.",
@@ -65,7 +65,7 @@ export default function Experience() {
               </h2>
             </div>
             <motion.p variants={fadeUpD(0.1)} style={{ color: "#555", fontSize: "0.9rem", maxWidth: 240, lineHeight: 1.7 }}>
-              1.9 years of full-time production experience.
+              1 year 10 months of full-time production experience.
             </motion.p>
           </motion.div>
         </motion.div>

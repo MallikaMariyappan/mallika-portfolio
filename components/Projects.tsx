@@ -79,7 +79,7 @@ const projects = [
     ],
     flow: ["Requirements", "Design", "React.js Web", "Flutter App", "API Integration", "Play Store"],
     github: null,
-    live: null,
+    live: "https://e-ielts.sasthra.in/",
     icon: Globe,
   },
   {
@@ -103,7 +103,7 @@ const projects = [
     ],
     flow: ["Curriculum Design", "Flutter UI", "Firebase Setup", "Audio Integration", "Testing", "Play Store"],
     github: null,
-    live: null,
+    live: "https://play.google.com/store/apps/details?id=com.ace.my_esl_app&pcampaignid=web_share",
     icon: Smartphone,
   },
   {
@@ -127,7 +127,7 @@ const projects = [
     ],
     flow: ["Figma", "Component Build", "API Integration", "Admin Panel", "RBAC", "Client Delivery"],
     github: null,
-    live: null,
+    live: "https://e-pte.sasthra.in/",
     icon: Building2,
   },
 ];
@@ -180,7 +180,8 @@ function CardBody({ p }: { p: typeof projects[0] }) {
               <motion.a href={p.live} target="_blank" rel="noopener noreferrer"
                 whileHover={{ y: -2 }}
                 style={{ display: "inline-flex", alignItems: "center", gap: 7, background: "transparent", color: "#aaa", fontWeight: 700, fontSize: "0.72rem", letterSpacing: "0.06em", textTransform: "uppercase", padding: "8px 16px", borderRadius: 8, border: "1px solid rgba(255,255,255,0.18)" }}>
-                <Globe size={13} /> Live Demo <ArrowUpRight size={11} />
+                {p.id === "esl" ? <Smartphone size={13} /> : <Globe size={13} />}
+                {p.id === "esl" ? "Play Store" : "Live Demo"} <ArrowUpRight size={11} />
               </motion.a>
             )}
           </div>
