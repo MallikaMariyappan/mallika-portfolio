@@ -156,6 +156,10 @@ npm start
 
 ## Deployment (Vercel)
 
+Google Analytics is configured in `app/layout.tsx` with measurement ID
+`G-R1T61SMPR4`. After deploying, visit the site and check the GA4 Realtime
+report to confirm that data is being received.
+
 ### Option 1 — Vercel Dashboard (Recommended)
 
 1. Push this repo to GitHub
